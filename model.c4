@@ -1,1 +1,34 @@
+specification {
+  element person
+  element system
+  element externalSystem
+}
 
+model {
+
+  // Pessoas
+  franqueado = person 'Franqueado'
+  clienteInterno = person 'Cliente Interno'
+  suporte = person 'Equipe de Suporte'
+
+  // Sistema principal
+  plataforma = system 'Plataforma de Gestão Financeira'
+
+  // Sistemas externos
+  identidade = externalSystem 'Serviço de Identidade'
+  email = externalSystem 'Provedor de E-mail'
+  adquirentes = externalSystem 'Adquirentes'
+  openFinance = externalSystem 'Instituições Financeiras'
+  parceiros = externalSystem 'Sistemas Parceiros'
+
+  // Relações
+  franqueado -> plataforma 'Utiliza'
+  clienteInterno -> plataforma 'Opera'
+  suporte -> plataforma 'Presta suporte'
+
+  plataforma -> identidade 'Autentica usuários'
+  plataforma -> email 'Envia notificações'
+  plataforma -> adquirentes 'Troca arquivos via FTPS'
+  plataforma -> openFinance 'Integra via Open Finance'
+  plataforma -> parceiros 'Integra via APIs e Webhooks'
+}
