@@ -1,1 +1,11 @@
+views {
 
+  view c1 {
+
+    title 'C1 - Contexto da Plataforma de Gestão Financeira'
+
+    include *
+
+  }
+
+}
