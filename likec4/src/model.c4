@@ -1,67 +1,82 @@
 model {
 
-  customer = actor 'Customer' {
-    description 'Customer of the cloud system'
+    // Pessoas
+
+
+  franqueado = actor 'Franqueado' {
+    description 'Utiliza a plataforma para gestão financeira.'
   }
 
-  cloud = system 'Cloud System' {
+  clienteInterno = actor 'Cliente Interno' {
+    description 'Responsável pela operação financeira.'
+  }
+
+  suporte = actor 'Equipe de Suporte' {
+    description 'Atende usuários da plataforma.'
+  }
+
+    // Sistema
+
+
+  plataforma = system 'Plataforma de Gestão Financeira' {
     description '
-      Our SaaS platfrom that allows
-      customers to interact with
-      the latest technologies
+      Plataforma utilizada por franqueados e equipes internas
+      para operação e gestão financeira.
     '
+}
 
-    ui = component 'Frontend' {
-      description 'All the frontend applications of the cloud system'
-      style {
-        shape browser
-      }
-    }
+  // Sistemas externos
 
-    backend = component 'Backend' {
-      description 'The backend services of the cloud system'
-    }
 
+ identidade = system 'Serviço de Identidade' {
+    description 'Responsável pela autenticação e autorização.'
+}
+   email = externalSystem 'Provedor de E-mail' {
+    description 'Responsável pelo envio de e-mails aos usuários.'
   }
 
-  customer -> cloud 'uses and pays'
-  customer -> ui 'uses web and mobile'
-
-  provider = system 'Managed Services' {
-    description '
-      Provider of managed services
-      and cloud hosting
-    '
+  adquirentes = externalSystem 'Adquirentes (via FTPS)' {
+    description 'Recebem e disponibilizam arquivos financeiros por FTPS.'
   }
 
-  cloud -> provider 'uses services'
+  openfinance = externalSystem 'Instituições financeiras (Open Finance)' {
+    description 'Disponibilizam serviços financeiros e dados via Open Finance.'
+  }
+
+  parceiros = externalSystem 'Sistemas Parceiros'  {
+    description 'Integram-se através de APIs REST e Webhooks.'
+  }
+
+    // Relações
+
+  franqueado -> plataforma 'Utiliza'
+
+  clienteInterno -> plataforma 'Opera'
+
+  suporte -> plataforma 'Presta suporte'
+
+  plataforma -> identidade 'Autentica usuários'
+
+  plataforma -> email 'Envia notificações'
+
+  plataforma -> adquirentes 'Troca arquivos'
+
+  plataforma -> openFinance 'Consulta dados'
+
+  plataforma -> parceiros 'Integra'
+
+    parceiros -> plataforma 'Notifica eventos'
+
 }
 
 views {
 
-  view index {
-    title 'Landscape'
-    include *
-  }
+  view contexto {
 
-  view cloud of cloud {
-    title 'Context: Cloud System'
+    title 'C1 - Contexto da Plataforma Financeira'
+
     include *
 
-    style * {
-      color secondary
-    }
-    style cloud, cloud.* {
-      color green
-    }
-  }
-
-  view provider of provider {
-    title 'Context: Managed Services'
-    include
-      *,
-      cloud,
-      cloud.* -> provider.*
   }
 
 }

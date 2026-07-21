@@ -7,26 +7,23 @@ specification {
   }
 
   element system
-  element component
-  element service
+
   element webapp {
     style {
       shape browser
     }
   }
-  element mobile {
-    style {
-      shape mobile
-    }
-  }
+
+  element service
+
+  element worker
+
   element database {
     style {
       shape storage
     }
   }
-  element db_table {
-    style {
-      shape storage
-    }
-  }
+
+  element broker
+
 }
