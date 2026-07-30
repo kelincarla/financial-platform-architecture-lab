@@ -19,10 +19,30 @@ model {
 
 
   plataforma = system 'Plataforma de Gestão Financeira' {
-    description '
-      Plataforma utilizada por franqueados e equipes internas
-      para operação e gestão financeira.
-    '
+
+  description 'Plataforma utilizada para gestão financeira de redes de franquias.'
+
+  portal = webapp 'Portal Web MVC' {
+    description '.NET Framework MVC'
+  }
+
+  api = service 'API Financeira' {
+    description '.NET Framework'
+  }
+
+  react = webapp 'Microfrontend React'
+
+  vue = webapp 'Microfrontend Vue'
+
+  node = service 'Microserviço Node'
+
+  workers = service 'Workers'
+
+  cronjobs = service 'CronJobs'
+
+  rabbit = service 'RabbitMQ'
+
+  mongo = database 'MongoDB'
 }
 
   // Sistemas externos
@@ -31,19 +51,19 @@ model {
  identidade = system 'Serviço de Identidade' {
     description 'Responsável pela autenticação e autorização.'
 }
-   email = externalSystem 'Provedor de E-mail' {
+   email = system 'Provedor de E-mail' {
     description 'Responsável pelo envio de e-mails aos usuários.'
   }
 
-  adquirentes = externalSystem 'Adquirentes (via FTPS)' {
+  adquirentes = system 'Adquirentes (via FTPS)' {
     description 'Recebem e disponibilizam arquivos financeiros por FTPS.'
   }
 
-  openfinance = externalSystem 'Instituições financeiras (Open Finance)' {
+  openfinance = system 'Instituições financeiras (Open Finance)' {
     description 'Disponibilizam serviços financeiros e dados via Open Finance.'
   }
 
-  parceiros = externalSystem 'Sistemas Parceiros'  {
+  parceiros = system 'Sistemas Parceiros'  {
     description 'Integram-se através de APIs REST e Webhooks.'
   }
 
@@ -61,7 +81,7 @@ model {
 
   plataforma -> adquirentes 'Troca arquivos'
 
-  plataforma -> openFinance 'Consulta dados'
+  plataforma -> openfinance 'Consulta dados'
 
   plataforma -> parceiros 'Integra'
 
@@ -69,14 +89,3 @@ model {
 
 }
 
-views {
-
-  view contexto {
-
-    title 'C1 - Contexto da Plataforma Financeira'
-
-    include *
-
-  }
-
-}

@@ -1,0 +1,9 @@
+views {
+
+  view containers of plataforma {
+    title 'C2 - Containers'
+
+    include plataforma.*
+  }
+
+}
