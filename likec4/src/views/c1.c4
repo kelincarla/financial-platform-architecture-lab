@@ -2,7 +2,7 @@ views {
 
   view contexto of plataforma {
 
-    title 'C1 - Contexto da Plataforma Financeira'
+    title 'C1 - Contexto da Plataforma Financeira 2'
 
     include *
 
