@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "likec4 start",
-    "dev": "likec4 serve",
-    "build": "likec4 build",
-    "export:png": "likec4 export png -o ./png"
-  },
+  "start": "likec4 start",
+  "dev": "likec4 serve",
+  "build": "likec4 build --base-url /financial-platform-architecture-lab/",
+  "export:png": "likec4 export png -o ./png"
+},
   "devDependencies": {
     "likec4": "*"
   }
